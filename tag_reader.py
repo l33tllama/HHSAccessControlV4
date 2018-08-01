@@ -1,4 +1,4 @@
-import ConfigParser
+import ConfigParser, time
 from Log import Logger
 from DoorController import DoorController as dc
 from SQLiteDB import SQLiteDB as sdb
@@ -26,7 +26,7 @@ class TagReader():
         self.dc.set_alarm_armed_callback(self.alarm_armed)
         self.db = sdb("members.db")
         #member, is_allowed = self.db.is_allowed(39160494)
-        self.tag_scanned(0, 39160494)
+        #self.tag_scanned(0, 39160494)
         #print str((member, is_allowed))
 
     def unlock_door(self, contact_name):
@@ -84,8 +84,8 @@ class TagReader():
 
     def run(self):
         while(True):
-            
-        pass
+            time.sleep(30*60*60)
+            self.log.info("Heartbeat")
 
 
 if __name__ == '__main__':

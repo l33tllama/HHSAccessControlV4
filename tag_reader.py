@@ -26,7 +26,7 @@ class TagReader():
         self.dc.set_alarm_armed_callback(self.alarm_armed)
         self.db = sdb("members.db")
         #member, is_allowed = self.db.is_allowed(39160494)
-        #self.tag_scanned(0, 39160494)
+        #self.tag_scanned(0, 39163864)
         #print str((member, is_allowed))
 
     def unlock_door(self, contact_name):

@@ -24,9 +24,13 @@ class DatabaseSync():
         self.db_reload_seconds = self.config.getint('TidyHQ', 'update_interval_sec')
         self.push_apikey = self.config.get('Pushover', 'access_token')
         self.push_userkey = self.config.get('Pushover', 'user_key')
+        log_filename = self.config.get('Logging', 'filename')
+        log_filesize = self.config.get('Logging', 'size_bytes')
+        log_backup_count = self.config.get('Logging', 'backup_count')
         #print "Pushover token: " + self.push_apikey
 
-        self.log = Logger(self.push_apikey, self.push_userkey, "HHSAccess")
+        self.log = Logger(log_filename, log_filesize, log_backup_count, self.push_apikey, self.push_userkey,
+                          "HHSAccess")
         self.tidyhq = TidyHQController(tidy_client_id, tidy_client_secret, tidy_member_group, tidy_domain_prefix)
 
     def reload_db(self):

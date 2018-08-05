@@ -14,7 +14,7 @@ class TagReader():
         self.config.read(self.config_filename)
         self.push_apikey = self.config.get('Pushover', 'access_token')
         self.push_userkey = self.config.get('Pushover', 'user_key')
-        log_filename = self.config.get('Logging', 'filename')
+        log_filename = self.config.get('Logging', 'tag_filename')
         log_filesize = self.config.get('Logging', 'size_bytes')
         log_backup_count = self.config.get('Logging', 'backup_count')
         self.log = Logger(log_filename, log_filesize, log_backup_count, self.push_apikey, self.push_userkey, "HHSAccess")

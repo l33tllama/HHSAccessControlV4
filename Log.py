@@ -14,6 +14,9 @@ class FileLogger():
         self.rot_handler = logging.handlers.RotatingFileHandler(log_filename,
                                                                 maxBytes=log_filesize,
                                                                 backupCount=log_backup_count)
+        self.rot_handler.setFormatter(self.formatter)
+        self.entrant_logger.addHandler(self.rot_handler)
+        
     def info(self, message):
         self.entrant_logger.info(message)
 
@@ -75,7 +78,7 @@ class Logger():
 
     def alarm_sounding(self):
         self.filelogger.error("Alarm sounding!!")
-        self.pushnotify.pushnotify_msg("Alarm is sounding!")
+        self.pushnotify.pushnotify_msg("Alarm is sounding!", "alamr-sounding")
 
     def invalid_tag(self, rfid_tag, member):
         self.filelogger.error("Invalid tag scanned " + rfid_tag + " " + member)

@@ -25,7 +25,7 @@ class TagReader():
         self.dc.set_alarm_sounding_callback(self.alarm_sounding)
         self.dc.set_alarm_armed_callback(self.alarm_armed)
         self.db = sdb("members.db")
-        self.log.notify("Startup completed", "System startup")
+        self.log.log_and_notify("Startup completed", "System startup")
         #member, is_allowed = self.db.is_allowed(39160494)
         #self.tag_scanned(0, 39163864)
         #print str((member, is_allowed))

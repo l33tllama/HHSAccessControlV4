@@ -27,7 +27,7 @@ class TagReader():
         self.db = sdb("members.db")
         self.log.log_and_notify("Startup completed", "System startup")
         #member, is_allowed = self.db.is_allowed(39160494)
-        self.tag_scanned(0, 39163864)
+        #self.tag_scanned(0, 39163864)
         #print str((member, is_allowed))
 
     def unlock_door(self, contact_name):

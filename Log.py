@@ -1,6 +1,6 @@
 import logging, logging.handlers
 from time import localtime, strftime, sleep
-import pushnotify
+import socket
 import httplib, urllib
 
 class FileLogger():
@@ -16,7 +16,7 @@ class FileLogger():
                                                                 backupCount=log_backup_count)
         self.rot_handler.setFormatter(self.formatter)
         self.entrant_logger.addHandler(self.rot_handler)
-        
+
     def info(self, message):
         self.entrant_logger.info(message)
 
@@ -35,14 +35,17 @@ class PushoverLogger():
         self.pushnotify_msg(message, title)
 
     def pushnotify_msg(self, desc, event):
-        conn = httplib.HTTPSConnection("api.pushover.net:443")
-        conn.request("POST", "/1/messages.json",
-                     urllib.urlencode({
-                         "token": self.api_token,
-                         "user": self.user_key,
-                         "message": desc,
-                     }), {"Content-type": "application/x-www-form-urlencoded"})
-        conn.getresponse()
+        try:
+            conn = httplib.HTTPSConnection("api.pushover.net:443")
+            conn.request("POST", "/1/messages.json",
+                         urllib.urlencode({
+                             "token": self.api_token,
+                             "user": self.user_key,
+                             "message": desc,
+                         }), {"Content-type": "application/x-www-form-urlencoded"})
+            conn.getresponse()
+        except socket.gaierror as e:
+            print e
 
 
 class Logger():

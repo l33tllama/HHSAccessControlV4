@@ -8,6 +8,9 @@ class TagReader():
     config_filename = "config.cfg"
 
     def __init__(self):
+
+        self.last_tag_scanned = 0
+        self.tag_scan_count = 0
         self.tag_scan_repeat_message = 3
 
         self.config = ConfigParser.RawConfigParser()

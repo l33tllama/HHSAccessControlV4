@@ -61,10 +61,15 @@ class TidyHQController():
             first_name = contact["first_name"]
             last_name = contact["last_name"]
             status = "NA"
+            found_active_membership = False
             for membership in memberships:
                 if membership["contact_id"] == id:
                     status = membership['state']
-                    
+                    if status == "activated":
+                        found_active_membership = True
+            if found_active_membership:
+                status = "activated"
+
             insert_cmd = 'INSERT or REPLACE INTO members ' +\
             "VALUES ('" + str(id) + "' ,'" +\
             str(first_name) + "', '" +\

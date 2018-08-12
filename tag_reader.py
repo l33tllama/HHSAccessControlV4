@@ -30,7 +30,7 @@ class TagReader():
         self.db = sdb("members.db")
         self.log.log_and_notify("Startup completed", "System startup")
         #member, is_allowed = self.db.is_allowed(39160494)
-        #self.tag_scanned(0, 39163864)
+        #self.tag_scanned(0, 99412070)
         #print str((member, is_allowed))
 
     def unlock_door(self, contact_name):
@@ -57,15 +57,16 @@ class TagReader():
                 info_str += " - allowed."
             else:
                 info_str += " - not allowed."
+                self.log.notify(contact_name + " tried to enter but not allowed.", "not allowed in")
             self.log.info(info_str)
             if is_allowed: self.open_door(contact_name)
         else:
             self.log.info("Unknown ID.")
 
         if not is_allowed:
-            self.log.invalid_tag_retries(rfid, contact_name)
+            #self.log.invalid_tag_retries(rfid, contact_name)
 
-            # Cheack for repeat scans
+            # Check for repeat scans
             if(rfid == self.last_tag_scanned):
                 self.tag_scan_count += 1
                 if(self.tag_scan_count >= self.tag_scan_repeat_message):

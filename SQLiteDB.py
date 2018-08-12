@@ -9,11 +9,14 @@ class SQLiteDB:
         cur = conn.cursor()
         cur.execute('select * from members where rfid is ' + str(rfid))
         member = cur.fetchone()
-        # if active member or temp_member (hack)
-        if member[4] == 'activated' or member[5] == 'True':
-            return (member, True)
+        if member is not None:
+            # if active member or temp_member (hack)
+            if member[4] == 'activated' or member[5] == 'True':
+                return (member, True)
+            else:
+                return (member, False)
         else:
-            return (None, False)
+            return None, False
 
         print str(member[4])
         print str(member)
